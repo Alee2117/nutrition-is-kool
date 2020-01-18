@@ -4,10 +4,14 @@ const Nutrition = () => {
   const [food, setFood] = useState("");
 
   const getInput = event => {
+    event.preventDefault();
+    console.log(event.target.value);
     setFood(event.target.value);
   };
 
-  //   const submitFood = () => {};
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
 
   useEffect(() => {
     const appId = "e124e5bc";
@@ -21,18 +25,18 @@ const Nutrition = () => {
         return response.json();
       })
       .then(responseData => {
-        console.log(responseData.hits[0].fields);
+        console.log(responseData.hits);
       });
-  });
+  }, [food]);
 
   return (
     <div className="nutrition-container">
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           className="text"
           placeholder="What did you have to eat?"
-          value={food}
+          name="enteredFood"
           onChange={getInput}
         ></input>
         <input type="submit" onClick={getInput}></input>
