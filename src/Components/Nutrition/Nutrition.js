@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const Nutrition = () => {
   const [food, setFood] = useState("");
   const [search, setSearch] = useState("");
-  const [isLoaded, setisLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const getInput = e => {
     e.preventDefault();
@@ -12,9 +12,10 @@ const Nutrition = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setIsLoaded(true);
     setFood(e.target.value);
-    setisLoaded(true);
   };
+
   const getNutrition = food => {
     const appId = "e124e5bc";
     const appKey = "fd3e0319818416b4e8496e3502bcb565";
@@ -25,15 +26,17 @@ const Nutrition = () => {
         return response.json();
       })
       .then(responseData => {
-        console.log(responseData.hits[0].fields);
+        setFood(responseData.hits[0].fields.item_name);
+        console.log(responseData.hits[0].fields.item_name);
       });
   };
 
   useEffect(() => {
     if (isLoaded) {
       getNutrition(search);
+      setIsLoaded(false);
     }
-  }, [food]);
+  }, [isLoaded]);
 
   return (
     <div className="nutrition-container">
