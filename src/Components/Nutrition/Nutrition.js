@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./nutrition.module.css";
 
 const Nutrition = () => {
   // Setting initial state
@@ -7,6 +8,10 @@ const Nutrition = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
+  let listItem = food;
+
+  // Dynamic li element to fill the ul rendered below
+  const element = <li className={styles.li}>{listItem}</li>;
 
   // Getting user input for an argument to be used later in API call
   const getInput = e => {
@@ -75,6 +80,7 @@ const Nutrition = () => {
       <p>Item = {food}</p>
       <p>Calories = {calories}</p>
       <p>Protein = {protein}</p>
+      <ul>{element}</ul>
     </div>
   );
 };
