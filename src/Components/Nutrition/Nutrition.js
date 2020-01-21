@@ -8,10 +8,12 @@ const Nutrition = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
-  let listItem = food;
+  const [list, setList] = useState([]);
+  const [foodId, setFoodId] = useState("");
 
-  // Dynamic li element to fill the ul rendered below
-  const element = <li className={styles.li}>{listItem}</li>;
+  const addInput = () => {
+    setList(list => [...list, search]);
+  };
 
   // Getting user input for an argument to be used later in API call
   const getInput = e => {
@@ -24,6 +26,7 @@ const Nutrition = () => {
     e.preventDefault();
     setIsLoaded(true);
     setFood(e.target.value);
+    console.log(list);
   };
 
   // Function that holds API call using form input
@@ -39,8 +42,7 @@ const Nutrition = () => {
       .then(responseData => {
         setFood(responseData.hits[0].fields.item_name);
         let foodId = responseData.hits[0].fields.item_id;
-        console.log(responseData);
-        console.log(foodId);
+        setFoodId(foodId);
         fetch(
           `https://api.nutritionix.com/v1_1/item?id=${foodId}&appId=${appId}&appKey=${appKey}`
         )
@@ -50,7 +52,6 @@ const Nutrition = () => {
           .then(responseData => {
             setCalories(responseData.nf_calories);
             setProtein(responseData.nf_protein);
-            console.log(responseData);
           });
       });
   };
@@ -74,13 +75,19 @@ const Nutrition = () => {
           name="enteredFood"
           onChange={getInput}
         ></input>
-        <input type="submit"></input>
+        <input type="submit" onClick={addInput}></input>
       </form>
       <h1>Hello!</h1>
       <p>Item = {food}</p>
       <p>Calories = {calories}</p>
       <p>Protein = {protein}</p>
-      <ul>{element}</ul>
+      <ul>
+        {list.map(item => (
+          <li key={Math.random()} className={styles.li}>
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
