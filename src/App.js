@@ -5,10 +5,12 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
-      <div className="container">
-        <h1>Nutrition Counter</h1>
-        <Nutrition />
+      <div className="overlay">
+        <header className="App-header"></header>
+        <div className="container">
+          <h1>Nutrition Counter</h1>
+          <Nutrition />
+        </div>
       </div>
     </div>
   );

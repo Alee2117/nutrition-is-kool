@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./nutrition.module.css";
+import TableList from "../TableList/TableList";
+import FoodForm from "../FoodForm/FoodForm";
 
 const Nutrition = () => {
   // Setting initial state
@@ -42,7 +44,6 @@ const Nutrition = () => {
       .then(responseData => {
         setFood(responseData.hits[0].fields.item_name);
         let foodId = responseData.hits[0].fields.item_id;
-        setFoodId(foodId);
         fetch(
           `https://api.nutritionix.com/v1_1/item?id=${foodId}&appId=${appId}&appKey=${appKey}`
         )
@@ -52,6 +53,7 @@ const Nutrition = () => {
           .then(responseData => {
             setCalories(responseData.nf_calories);
             setProtein(responseData.nf_protein);
+            setFoodId(foodId);
           });
       });
   };
@@ -60,27 +62,28 @@ const Nutrition = () => {
   useEffect(() => {
     if (isLoaded) {
       getNutrition(search);
+      setFoodId(foodId);
+      addInput();
       setIsLoaded(false);
     }
     // eslint-disable-next-line
   }, [isLoaded]);
 
   return (
-    <div className="nutrition-container">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          className="text"
-          placeholder="What did you have to eat?"
-          name="enteredFood"
-          onChange={getInput}
-        ></input>
-        <input type="submit" onClick={addInput}></input>
-      </form>
-      <h1>Hello!</h1>
-      <p>Item = {food}</p>
-      <p>Calories = {calories}</p>
-      <p>Protein = {protein}</p>
+    <div className={styles.nutritionContainer}>
+      <FoodForm submit={handleSubmit} input={getInput} />
+      <table className={styles.center}>
+        <thead>
+          <tr>
+            <th>Food Item</th>
+            <th>Calories</th>
+            <th>Protein</th>
+          </tr>
+        </thead>
+        <tbody>
+          <TableList food={food} calories={calories} protein={protein} />
+        </tbody>
+      </table>
       <ul>
         {list.map(item => (
           <li key={Math.random()} className={styles.li}>
