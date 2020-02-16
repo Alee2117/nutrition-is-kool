@@ -11,7 +11,8 @@ html {
   background-size: cover;
 }
 h1 {
-  letter-spacing: 4px;
+  letter-spacing: 3px;
+  font-size: 50px;
 }
 
 body {

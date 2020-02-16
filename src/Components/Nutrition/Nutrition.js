@@ -87,7 +87,7 @@ const Nutrition = () => {
       <ul>
         {list.map(item => (
           <li key={Math.random()} className={styles.li}>
-            {item}
+            {item} {calories} {protein}
           </li>
         ))}
       </ul>
