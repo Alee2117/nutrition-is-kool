@@ -12,6 +12,7 @@ const Nutrition = () => {
   const [protein, setProtein] = useState("");
   const [list, setList] = useState([]);
   const [foodId, setFoodId] = useState("");
+  const [foodList, setFoodList] = useState([]);
 
   const addInput = () => {
     setList(list => [...list, search]);
@@ -54,6 +55,14 @@ const Nutrition = () => {
             setCalories(responseData.nf_calories);
             setProtein(responseData.nf_protein);
             setFoodId(foodId);
+            const foodObject = {
+              calories: responseData.nf_calories,
+              protein: responseData.nf_protein,
+              food: responseData.item_name
+            };
+            setFoodList([...foodList, foodObject]);
+            setList([...list, JSON.stringify(foodObject)]);
+            console.log(foodList);
           });
       });
   };
@@ -81,13 +90,13 @@ const Nutrition = () => {
           </tr>
         </thead>
         <tbody>
-          <TableList food={food} calories={calories} protein={protein} />
+          <TableList foodList={foodList} />
         </tbody>
       </table>
       <ul>
         {list.map(item => (
           <li key={Math.random()} className={styles.li}>
-            {item} {calories} {protein}
+            {item}
           </li>
         ))}
       </ul>

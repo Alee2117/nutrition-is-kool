@@ -1,13 +1,13 @@
 import React from "react";
 
-const TableList = props => {
-  return (
+const TableList = ({ foodList }) => {
+  return foodList.map(item => (
     <tr>
-      <td>{props.food}</td>
-      <td>{props.calories}</td>
-      <td>{props.protein}</td>
+      <td>{item.food}</td>
+      <td>{item.calories}</td>
+      <td>{item.protein}</td>
     </tr>
-  );
+  ));
 };
 
 export default TableList;
