@@ -5,18 +5,10 @@ import FoodForm from "../FoodForm/FoodForm";
 
 const Nutrition = () => {
   // Setting initial state
-  const [food, setFood] = useState("");
   const [search, setSearch] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const [calories, setCalories] = useState("");
-  const [protein, setProtein] = useState("");
-  const [list, setList] = useState([]);
   const [foodId, setFoodId] = useState("");
   const [foodList, setFoodList] = useState([]);
-
-  const addInput = () => {
-    setList(list => [...list, search]);
-  };
 
   // Getting user input for an argument to be used later in API call
   const getInput = e => {
@@ -28,8 +20,7 @@ const Nutrition = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setIsLoaded(true);
-    setFood(e.target.value);
-    console.log(list);
+    // console.log(list);
   };
 
   // Function that holds API call using form input
@@ -43,7 +34,6 @@ const Nutrition = () => {
         return response.json();
       })
       .then(responseData => {
-        setFood(responseData.hits[0].fields.item_name);
         let foodId = responseData.hits[0].fields.item_id;
         fetch(
           `https://api.nutritionix.com/v1_1/item?id=${foodId}&appId=${appId}&appKey=${appKey}`
@@ -52,17 +42,15 @@ const Nutrition = () => {
             return response.json();
           })
           .then(responseData => {
-            setCalories(responseData.nf_calories);
-            setProtein(responseData.nf_protein);
             setFoodId(foodId);
             const foodObject = {
               calories: responseData.nf_calories,
               protein: responseData.nf_protein,
-              food: responseData.item_name
+              food: responseData.item_name,
+              key: foodId
             };
             setFoodList([...foodList, foodObject]);
-            setList([...list, JSON.stringify(foodObject)]);
-            console.log(foodList);
+            setIsLoaded(false);
           });
       });
   };
@@ -72,8 +60,6 @@ const Nutrition = () => {
     if (isLoaded) {
       getNutrition(search);
       setFoodId(foodId);
-      addInput();
-      setIsLoaded(false);
     }
     // eslint-disable-next-line
   }, [isLoaded]);
@@ -93,13 +79,6 @@ const Nutrition = () => {
           <TableList foodList={foodList} />
         </tbody>
       </table>
-      <ul>
-        {list.map(item => (
-          <li key={Math.random()} className={styles.li}>
-            {item}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
