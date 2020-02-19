@@ -1,0 +1,30 @@
+.text {
+  font-size: 25px;
+  background: transparent;
+  color: white;
+  outline: none;
+  border-style: hidden;
+  border-bottom: 1px solid white;
+}
+
+.text:focus {
+  outline: none;
+}
+
+.btn {
+  font-size: 25px;
+  margin-left: 15px;
+  background: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
+.foodForm {
+  margin-top: 200px;
+}
+
+th,
+td {
+  display: inline-block;
+  margin-right: 50px;
+}

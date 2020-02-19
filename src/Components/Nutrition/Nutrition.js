@@ -14,6 +14,7 @@ const Nutrition = () => {
   const getInput = e => {
     e.preventDefault();
     setSearch(e.target.value);
+    console.log(isLoaded);
   };
 
   // Submitting user input / starting API call / setting food to be searched
@@ -47,10 +48,14 @@ const Nutrition = () => {
               calories: responseData.nf_calories,
               protein: responseData.nf_protein,
               food: responseData.item_name,
-              key: foodId
+              key: foodId,
+              totalCal: 0
             };
             setFoodList([...foodList, foodObject]);
             setIsLoaded(false);
+            console.log(isLoaded);
+            console.log(foodList);
+            console.log(foodObject.totalCal);
           });
       });
   };
@@ -73,6 +78,8 @@ const Nutrition = () => {
             <th>Food Item</th>
             <th>Calories</th>
             <th>Protein</th>
+            <th>Total Calories</th>
+            <th>Total Protein</th>
           </tr>
         </thead>
         <tbody>

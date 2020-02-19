@@ -6,6 +6,7 @@ const TableList = ({ foodList }) => {
       <td>{item.food}</td>
       <td>{item.calories}</td>
       <td>{item.protein}</td>
+      <td>{Math.floor(item.totalCal + item.calories)}</td>
     </tr>
   ));
 };
