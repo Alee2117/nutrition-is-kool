@@ -11,6 +11,10 @@
   outline: none;
 }
 
+.text::placeholder {
+  color: white;
+}
+
 .btn {
   font-size: 25px;
   margin-left: 15px;

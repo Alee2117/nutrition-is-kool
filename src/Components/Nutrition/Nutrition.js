@@ -9,12 +9,17 @@ const Nutrition = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [foodId, setFoodId] = useState("");
   const [foodList, setFoodList] = useState([]);
+  const [totalCal, setTotalCal] = useState(0);
+
+  const addCal = (cal, totalCal) => {
+    const total = cal + totalCal;
+    setTotalCal(total);
+  };
 
   // Getting user input for an argument to be used later in API call
   const getInput = e => {
     e.preventDefault();
     setSearch(e.target.value);
-    console.log(isLoaded);
   };
 
   // Submitting user input / starting API call / setting food to be searched
@@ -49,15 +54,14 @@ const Nutrition = () => {
               protein: responseData.nf_protein,
               food: responseData.item_name,
               key: foodId,
-              totalCal: 0
+              totalCal: totalCal
             };
+            addCal(foodObject.calories, totalCal);
             setFoodList([...foodList, foodObject]);
             setIsLoaded(false);
-            console.log(isLoaded);
-            console.log(foodList);
-            console.log(foodObject.totalCal);
           });
       });
+    console.log(isLoaded);
   };
 
   // Calling nutrition function that holds API
