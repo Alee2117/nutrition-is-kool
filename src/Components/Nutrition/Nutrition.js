@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./nutrition.module.css";
 import TableList from "../TableList/TableList";
 import FoodForm from "../FoodForm/FoodForm";
@@ -7,13 +7,20 @@ const Nutrition = () => {
   // Setting initial state
   const [search, setSearch] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  const [foodId, setFoodId] = useState("");
   const [foodList, setFoodList] = useState([]);
   const [totalCal, setTotalCal] = useState(0);
+  const [totalProtein, setTotalProtein] = useState(0);
 
-  const addCal = (cal, totalCal) => {
+  const addProtein = protein => {
+    const total = protein + totalProtein;
+    setTotalProtein(total);
+    return total;
+  };
+
+  const addCal = cal => {
     const total = cal + totalCal;
     setTotalCal(total);
+    return total;
   };
 
   // Getting user input for an argument to be used later in API call
@@ -26,7 +33,7 @@ const Nutrition = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setIsLoaded(true);
-    // console.log(list);
+    getNutrition(search);
   };
 
   // Function that holds API call using form input
@@ -48,30 +55,20 @@ const Nutrition = () => {
             return response.json();
           })
           .then(responseData => {
-            setFoodId(foodId);
             const foodObject = {
               calories: responseData.nf_calories,
               protein: responseData.nf_protein,
               food: responseData.item_name,
               key: foodId,
-              totalCal: totalCal
+              totalCal: addCal(responseData.nf_calories, totalCal),
+              totalProtein: addProtein(responseData.nf_protein)
             };
-            addCal(foodObject.calories, totalCal);
             setFoodList([...foodList, foodObject]);
             setIsLoaded(false);
           });
       });
     console.log(isLoaded);
   };
-
-  // Calling nutrition function that holds API
-  useEffect(() => {
-    if (isLoaded) {
-      getNutrition(search);
-      setFoodId(foodId);
-    }
-    // eslint-disable-next-line
-  }, [isLoaded]);
 
   return (
     <div className={styles.nutritionContainer}>

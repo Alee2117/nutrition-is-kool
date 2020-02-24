@@ -7,6 +7,7 @@ const TableList = ({ foodList }) => {
       <td>{item.calories}</td>
       <td>{item.protein}</td>
       <td>{item.totalCal}</td>
+      <td>{item.totalProtein}</td>
     </tr>
   ));
 };
