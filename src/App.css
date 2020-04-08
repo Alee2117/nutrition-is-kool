@@ -21,3 +21,16 @@ body {
   text-align: center;
   overflow: hidden;
 }
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 30px;
+  }
+
+  body {
+    margin: 40px auto;
+  }
+  html {
+    height: 1000px;
+  }
+}

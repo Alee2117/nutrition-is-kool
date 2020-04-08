@@ -14,13 +14,13 @@ const Nutrition = () => {
   const addProtein = protein => {
     const total = protein + totalProtein;
     setTotalProtein(total);
-    return total;
+    return Math.round(total);
   };
 
   const addCal = cal => {
     const total = cal + totalCal;
     setTotalCal(total);
-    return total;
+    return Math.round(total);
   };
 
   // Getting user input for an argument to be used later in API call
@@ -56,9 +56,9 @@ const Nutrition = () => {
           })
           .then(responseData => {
             const foodObject = {
-              calories: responseData.nf_calories,
-              protein: responseData.nf_protein,
-              food: responseData.item_name,
+              calories: Math.round(responseData.nf_calories),
+              protein: Math.round(responseData.nf_protein),
+              food: responseData.item_name.split(",")[0],
               key: foodId,
               totalCal: addCal(responseData.nf_calories, totalCal),
               totalProtein: addProtein(responseData.nf_protein)

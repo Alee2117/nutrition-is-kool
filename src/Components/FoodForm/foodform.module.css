@@ -31,4 +31,29 @@ th,
 td {
   display: inline-block;
   margin-right: 50px;
+  width: 140px;
+}
+
+@media (max-width: 420px) {
+  .foodForm {
+    margin-top: 20px;
+    display: inline-block;
+  }
+
+  .btn {
+    margin: 10px auto;
+    display: block;
+    font-size: 20px;
+  }
+
+  .text {
+    font-size: 20px;
+  }
+
+  th,
+  td {
+    width: 35px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 }
