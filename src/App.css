@@ -28,9 +28,10 @@ body {
   }
 
   body {
-    margin: 40px auto;
+    margin: 70px auto;
   }
   html {
     height: 1000px;
+    overflow-x: hidden;
   }
 }
