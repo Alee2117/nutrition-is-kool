@@ -8,7 +8,11 @@ table.center {
   margin-top: 100px;
 }
 
-@media (max-width: 420px) {
+.nutritionContainer {
+  font-size: 14px;
+}
+
+@media (max-width: 780px) {
   .center {
     width: 450px;
   }

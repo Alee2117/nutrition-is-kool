@@ -1,10 +1,14 @@
 .text {
-  font-size: 25px;
+  font-size: 18px;
   background: transparent;
   color: white;
   outline: none;
   border-style: hidden;
   border-bottom: 1px solid white;
+}
+
+.text::placeholder {
+  font-size: 14px;
 }
 
 .text:focus {
@@ -16,25 +20,30 @@
 }
 
 .btn {
-  font-size: 25px;
+  font-size: 16px;
   margin-left: 15px;
   background: transparent;
   color: white;
   border: 1px solid white;
 }
 
+.btn:hover {
+  background: rgba(255, 255, 255, 0.418);
+  cursor: pointer;
+}
+
 .foodForm {
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 th,
 td {
   display: inline-block;
-  margin-right: 50px;
-  width: 140px;
+  margin-right: 28px;
+  width: 100px;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 780px) {
   .foodForm {
     margin-top: 20px;
     display: inline-block;
@@ -43,17 +52,18 @@ td {
   .btn {
     margin: 10px auto;
     display: block;
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .text {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   th,
   td {
     width: 35px;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 10px;
+    margin-right: 35px;
   }
 }

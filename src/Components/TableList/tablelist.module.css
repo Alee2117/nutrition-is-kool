@@ -1,0 +1,13 @@
+.deleteIcon {
+    color: white;
+}
+
+.deleteButton {
+    background-color: transparent;
+    border: none;
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+    background-color: rgba(224, 224, 224, 0.733);
+}

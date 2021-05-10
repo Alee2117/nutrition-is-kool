@@ -11,7 +11,7 @@ const FoodForm = props => {
         name="enteredFood"
         onChange={props.input}
       ></input>
-      <input className={styles.btn} type="submit"></input>
+      <input className={styles.btn} type="submit" value="Add Food Item"></input>
     </form>
   );
 };

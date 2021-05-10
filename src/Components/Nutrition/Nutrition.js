@@ -11,6 +11,7 @@ const Nutrition = () => {
   const [totalCal, setTotalCal] = useState(0);
   const [totalProtein, setTotalProtein] = useState(0);
 
+
   const addProtein = protein => {
     const total = protein + totalProtein;
     setTotalProtein(total);
@@ -81,6 +82,7 @@ const Nutrition = () => {
             <th>Protein</th>
             <th>Total Calories</th>
             <th>Total Protein</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
